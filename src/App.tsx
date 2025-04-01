@@ -1,35 +1,89 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
+import About from "./components/pages/About";
 
-function App() {
-  const [count, setCount] = useState(0)
+// import "fontsource-roboto";
+import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import {
+  createTheme,
+  CssBaseline,
+  responsiveFontSizes,
+  Stack,
+  ThemeProvider,
+} from "@mui/material";
+import { red, grey } from "@mui/material/colors";
+import Services from "./components/pages/Services";
+import Boarding from "./components/pages/Boarding";
+import Daycare from "./components/pages/Daycare";
+import Faq from "./components/pages/Faq";
+import Contact from "./components/pages/Contact";
+import Home from "./components/pages/Home";
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+let theme = createTheme({
+  palette: {
+    primary: {
+      main: red[900],
+    },
+    secondary: {
+      main: grey[400],
+    },
+  },
+});
+theme = responsiveFontSizes(theme);
 
-export default App
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <Stack height="100vh" overflow="hidden">
+        <Header />
+        <Stack height="100%" overflow="auto">
+          <Outlet />
+          <Footer />
+        </Stack>
+      </Stack>
+    ),
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/services",
+        element: <Services />,
+      },
+      // {
+      //   path: "/gallery",
+      //   element: <About />,
+      // },
+      {
+        path: "/boarding",
+        element: <Boarding />,
+      },
+      {
+        path: "/daycare",
+        element: <Daycare />,
+      },
+      {
+        path: "/FAQ",
+        element: <Faq />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+    ],
+  },
+]);
+
+export const App = () => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <RouterProvider router={router} />
+  </ThemeProvider>
+);
