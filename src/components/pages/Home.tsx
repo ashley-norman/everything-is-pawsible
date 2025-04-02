@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Grid, Typography } from "@mui/material";
+import { Container, Divider, Grid, Stack, Typography } from "@mui/material";
 import Hero from "../Hero";
 import facilityPic from "../../img/facility.jpg";
 import mapPic from "../../img/map.png";
@@ -14,7 +14,7 @@ const Home = () => {
       <Hero />
 
       <Container maxWidth="lg" sx={{ pb: 5 }}>
-        <Box pt={6} display="flex" flexDirection="column">
+        <Stack divider={<Divider />}>
           <Section
             pic={mapPic}
             header="Central Location"
@@ -28,14 +28,14 @@ const Home = () => {
               </>
             }
           />
-          <Divider />
+
           <Section
             reverse
             pic={facilityPic}
             header="Facility"
             text="We have large kennels, spacious indoor and outdoor play areas, a home away from home for your beloved pet. With daily supervised exercise out in these play areas, your dog is bound to have their own vacation!"
           />
-        </Box>
+        </Stack>
         <Divider />
         <PageTitle title="Services" />
         <Grid container spacing={5}>
